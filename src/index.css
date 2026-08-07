@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+
+:root {
+  --blue-primary: #0284c7;
+  --teal-success: #0d9488;
+  --amber-pending: #d97706;
+  --bg-main: #020617;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
+  background-color: #020617;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Telugu', sans-serif;
+  background-color: #020617;
+  color: #ffffff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Touch targets — 48px minimum, 56px on tablet ─────────────────────── */
+button, a, [role="button"] {
+  min-height: 48px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+@media (min-width: 600px) {
+  button, a, [role="button"] { min-height: 56px; }
+  body { font-size: 1.05rem; }
+}
+
+/* ── Form inputs — generous hit area ──────────────────────────────────── */
+input, textarea, select {
+  min-height: 56px;
+}
+
+/* ── Token number display ──────────────────────────────────────────────── */
+.token-display {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--blue-primary);
+  line-height: 1.1;
+}
+
+/* ── Progress step indicator ───────────────────────────────────────────── */
+.step-active  { background-color: var(--blue-primary); color: white; }
+.step-done    { background-color: var(--teal-success);  color: white; }
+.step-pending { background-color: #E2E8F0; color: #94A3B8; }
+
+/* ── Script-aware line height ──────────────────────────────────────────── */
+/* Telugu ascenders/descenders and Devanagari matras need more vertical space */
+[lang="hi"], [lang="te"] {
+  font-size: 1.05em;
+  line-height: 1.85;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #CBD5E1; border-radius: 9999px; }
+
+/* ── Numeric keypad button — 88px for tablet comfort ─────────────────── */
+.keypad-btn {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid #E2E8F0;
+  color: #0F172A;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.keypad-btn:hover,
+.keypad-btn:active {
+  background: #1565C0;
+  color: white;
+  border-color: #1565C0;
+  transform: scale(0.95);
+}
+
+/* ── Card base ─────────────────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  padding: 1.5rem;
+}
+
+/* ── FLOATING emergency button — strong pulse ring ─────────────────────── */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0    rgba(220, 38, 38, 0.55); }
+  60%  { box-shadow: 0 0 0 18px rgba(220, 38, 38, 0);    }
+  100% { box-shadow: 0 0 0 0    rgba(220, 38, 38, 0);    }
+}
+.emergency-pulse {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* ── HOME Emergency tile — subtle glow, not alarming ───────────────────── */
+/* Slow, breathe-like glow that draws the eye without feeling urgent/scary  */
+@keyframes emergency-tile-glow {
+  0%, 100% {
+    box-shadow:
+      0 8px 24px rgba(220, 38, 38, 0.22),
+      0 0 0 0   rgba(220, 38, 38, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 12px 36px rgba(220, 38, 38, 0.38),
+      0 0 0 8px  rgba(220, 38, 38, 0);
+  }
+}
+.emergency-tile-pulse {
+  animation: emergency-tile-glow 3s ease-in-out infinite;
+}
+
+/* ── Fade-in for screen transitions ────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.screen-enter {
+  animation: fadeIn 0.22s ease forwards;
+}
+
+/* ── Category tiles — well above 48px floor ───────────────────────────── */
+.category-tile {
+  min-height: 148px;
+}
+
+/* ── Department / billing option tiles ────────────────────────────────── */
+/* ── Modal slide up animation ─────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.animate-slideUp {
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease forwards;
+}
